@@ -1,0 +1,83 @@
+<!-- uploader/templates/uploader/upload.html -->
+{% extends "base.html" %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="upload-container">
+    <div class="upload-form">
+        <h2>Upload Image</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-fields">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="upload-btn">Upload Image</button>
+        </form>
+    </div>
+</div>
+<style>
+    .upload-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 70vh;
+    }
+    .upload-form {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+        width: 100%;
+        max-width: 500px;
+    }
+    .upload-form h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: center;
+    }
+    .form-fields p {
+        margin-bottom: 15px;
+    }
+    .form-fields input, .form-fields select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    .upload-btn {
+        background-color: #4285F4;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        width: 100%;
+        margin-top: 10px;
+    }
+    .upload-btn:hover {
+        background-color: #3367D6;
+    }
+</style>
+{% else %}
+<div class="login-prompt">
+    <p>Please <a href="{% url 'login' %}">log in</a> to upload images.</p>
+</div>
+<style>
+    .login-prompt {
+        text-align: center;
+        margin-top: 50px;
+        padding: 20px;
+    }
+    .login-prompt a {
+        color: #4285F4;
+        text-decoration: none;
+    }
+    .login-prompt a:hover {
+        text-decoration: underline;
+    }
+</style>
+{% endif %}
+{% endblock %}
