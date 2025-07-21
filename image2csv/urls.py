@@ -19,6 +19,9 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from uploader.views import upload_view, download_csv
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,3 +30,4 @@ urlpatterns = [
     path('download/', download_csv, name='download_csv'),
     path('', upload_view, name='home'),
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
