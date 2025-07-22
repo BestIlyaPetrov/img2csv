@@ -1,18 +1,20 @@
 <!-- uploader/templates/uploader/upload.html -->
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 {% if user.is_authenticated %}
 <div class="upload-container">
     <div class="upload-form">
         <h2>Upload Image</h2>
-        <form method="post" enctype="multipart/form-data">
+        <form id="upload-form" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-fields">
                 {{ form.as_p }}
             </div>
             <button type="submit" class="upload-btn">Upload Image</button>
         </form>
+        <div id="processing" style="display:none;margin-top:10px;">Processing...</div>
     </div>
 </div>
 <style>
@@ -80,4 +82,5 @@
     }
 </style>
 {% endif %}
+<script src="{% static 'uploader/upload.js' %}"></script>
 {% endblock %}
